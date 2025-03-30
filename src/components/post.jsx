@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 
@@ -7,6 +8,12 @@ import { Comment } from './comment'
 import styles from './post.module.css'
 
 export function Post({ author, content, publishedAt }) {
+  const [comments, setComments] = useState([
+    'Parabéns pelo post!',
+  ])
+
+  const [newCommentText, setNewCommentText] = useState('')
+
   const publishedDateFormatted = format(
     publishedAt,
     "d 'de' LLLL 'de' yyyy 'às' HH:mm'h'",
@@ -18,7 +25,18 @@ export function Post({ author, content, publishedAt }) {
     addSuffix: true,
   })
 
-  const Posts = () => {
+  function handleCreateNewComment(event) {
+    event.preventDefault()
+
+    setComments([...comments, newCommentText])
+    setNewCommentText('')
+  }
+
+  function handleNewCommentChange(event) {
+    setNewCommentText(event.target.value)
+  }
+
+  const Content = () => {
     return content.map((line) => {
       if (line.type === 'paragraph') {
         return <p key={line.content}>{line.content}</p>
@@ -53,21 +71,33 @@ export function Post({ author, content, publishedAt }) {
       </header>
 
       <div className={styles.content}>
-        <Posts />
+        <Content />
       </div>
 
-      <form className={styles.feedbackForm}>
+      <form onSubmit={handleCreateNewComment} className={styles.feedbackForm}>
         <strong>Deixe seu feedback</strong>
-        <textarea placeholder="Escreva aqui seu feedback." />
+
+        <textarea
+          value={newCommentText}
+          onChange={handleNewCommentChange}
+          placeholder="Escreva aqui seu feedback."
+        />
+
         <footer>
           <button type="submit">Publicar</button>
         </footer>
       </form>
 
       <footer className={styles.commentList}>
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.length === 0 && (
+          <span>
+            Ninguém comentou ainda 😢. <strong>Que tal ser o primeiro?</strong>
+          </span>
+        )}
+
+        {comments.map((comment) => {
+          return <Comment content={comment} />
+        })}
       </footer>
     </article>
   )

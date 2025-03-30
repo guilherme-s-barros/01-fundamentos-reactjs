@@ -117,3 +117,9 @@
 .commentList {
   margin-top: 2rem;
 }
+
+.commentList > span {
+  line-height: 1.6;
+  color: var(--gray-400);
+  font-size: 0.875rem;
+}

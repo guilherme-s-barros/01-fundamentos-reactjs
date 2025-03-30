@@ -4,7 +4,7 @@ import { Avatar } from './avatar'
 
 import styles from './comment.module.css'
 
-export function Comment() {
+export function Comment({ content }) {
   return (
     <div className={styles.comment}>
       <Avatar src="https://i.pravatar.cc/500" hasBorder={false} />
@@ -16,7 +16,7 @@ export function Comment() {
               <strong>Devon Lane</strong>
 
               <time
-                datetime="2025-03-28 21:46:23"
+                dateTime="2025-03-28 21:46:23"
                 title="28 de março às 21:46h"
               >
                 Cerca de 2h atrás
@@ -28,7 +28,7 @@ export function Comment() {
             </button>
           </header>
 
-          <p>Muito bom Devon, parabéns!! 👏👏</p>
+          <p>{content}</p>
         </div>
 
         <footer>
