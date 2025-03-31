@@ -36,6 +36,10 @@ export function Post({ author, content, publishedAt }) {
     setNewCommentText(event.target.value)
   }
 
+  function deleteComment(comment) {
+    setComments(comments.filter(c => c !== comment))
+  }
+
   const Content = () => {
     return content.map((line) => {
       if (line.type === 'paragraph') {
@@ -96,7 +100,13 @@ export function Post({ author, content, publishedAt }) {
         )}
 
         {comments.map((comment) => {
-          return <Comment key={comment} content={comment} />
+          return (
+            <Comment
+              key={comment}
+              content={comment}
+              onDeleteComment={deleteComment}
+            />
+          )
         })}
       </footer>
     </article>

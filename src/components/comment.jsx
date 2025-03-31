@@ -4,7 +4,11 @@ import { Avatar } from './avatar'
 
 import styles from './comment.module.css'
 
-export function Comment({ content }) {
+export function Comment({ content, onDeleteComment }) {
+  function handleDeleteComment() {
+    onDeleteComment(content)
+  }
+
   return (
     <div className={styles.comment}>
       <Avatar src="https://i.pravatar.cc/500" hasBorder={false} />
@@ -23,7 +27,7 @@ export function Comment({ content }) {
               </time>
             </div>
 
-            <button title="Deletar comentário.">
+            <button onClick={handleDeleteComment} title="Deletar comentário.">
               <Trash size={24} />
             </button>
           </header>
