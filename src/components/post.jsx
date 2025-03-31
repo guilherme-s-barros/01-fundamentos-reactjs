@@ -96,7 +96,7 @@ export function Post({ author, content, publishedAt }) {
         )}
 
         {comments.map((comment) => {
-          return <Comment content={comment} />
+          return <Comment key={comment} content={comment} />
         })}
       </footer>
     </article>
