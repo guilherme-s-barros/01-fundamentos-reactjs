@@ -13,7 +13,7 @@ export function Comment({ content, onDeleteComment }) {
   }
 
   function handleApplaudComment() {
-    setApplauseCount(applauseCount + 1)
+    setApplauseCount(state => state + 1)
   }
 
   return (
