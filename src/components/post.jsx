@@ -63,7 +63,7 @@ export function Post({ author, content, publishedAt }) {
     })
   }
 
-  const isCommentTextEmpty = newCommentText.length === 0
+  const isNewCommentEmpty = newCommentText.length === 0
 
   return (
     <article className={styles.post}>
